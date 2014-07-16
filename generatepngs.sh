@@ -3,6 +3,6 @@
 mkdir output/png/;
 pushd output/svg/; 
 for i in `ls *.svg`; 
-	do inkscape --export-width=2000px --export-png=../png/$i.png $i; 
+	do inkscape --export-width=1288px --export-png=../png/$i.png $i; 
 done; 
 popd;

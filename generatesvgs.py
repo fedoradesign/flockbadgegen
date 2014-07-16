@@ -16,6 +16,13 @@ try:
 except:
     mkdir("output/svg")
 
+try:
+    stat("output/svg/background")
+except:
+    mkdir("output/svg/background")
+
+copy("templates/background/prague-garrett.jpg","output/svg/background/prague-garrett.jpg")
+
 with open('names.csv', 'rb') as csvfile:
 	names = csv.reader(csvfile, delimiter=',', quotechar='"')
 	for row in names:
@@ -27,7 +34,7 @@ with open('names.csv', 'rb') as csvfile:
 		elif row[0] == "SPEAKER":
 			copy("templates/speaker.svg",filenamestring)
 		elif row[0] == "STAFF":
-			copy("templates/speaker.svg",filenamestring)
+			copy("templates/staff.svg",filenamestring)
 		
 		for line in fileinput.input(filenamestring, inplace=True):
 			print line.replace("***firstname***", row[1])
