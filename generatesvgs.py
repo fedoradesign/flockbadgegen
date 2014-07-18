@@ -35,7 +35,15 @@ with open('names.csv', 'rb') as csvfile:
 			copy("templates/speaker.svg",filenamestring)
 		elif row[0] == "STAFF":
 			copy("templates/staff.svg",filenamestring)
-		
+
+		if row[5] == "No":
+			for line in fileinput.input(filenamestring, inplace=True):
+				print line.replace('inkscape:label="#vegan"', 'inkscape:label="#vegan" style="display:none"')
+			for line in fileinput.input(filenamestring, inplace=True):
+				print line.replace('inkscape:label="#veg"', 'inkscape:label="#veg" style="display:none"')
+		elif row[5] == "Vegan":
+			for line in fileinput.input(filenamestring, inplace=True):
+				print line.replace('inkscape:label="#veg"', 'inkscape:label="#veg" style="display:none"')
 		for line in fileinput.input(filenamestring, inplace=True):
 			print line.replace("***firstname***", row[1])
 
@@ -43,15 +51,11 @@ with open('names.csv', 'rb') as csvfile:
 			print line.replace("***lastname***", row[2])
 
 		for line in fileinput.input(filenamestring, inplace=True):
-			print line.replace("***twitter***", row[3])
+			if row[3] == "":
+				print line.replace("***twitter***", row[3])
+			else:
+				print line.replace("***twitter***", "@"+row[3])
 
-		if len(row) > 4:
-			for line in fileinput.input(filenamestring, inplace=True):
-				print line.replace("***stuff1***", row[4])
-		if len(row) > 5:
-			for line in fileinput.input(filenamestring, inplace=True):
-				print line.replace("***stuff2***", row[5])
-		if len(row)> 6:
-			for line in fileinput.input(filenamestring, inplace=True):
-				print line.replace("***stuff3***", row[6])		
+		for line in fileinput.input(filenamestring, inplace=True):
+			print line.replace("***stuff1***", row[4])	
 
